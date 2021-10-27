@@ -251,8 +251,8 @@ export async function main(denops: Denops) {
       return handle(key, vimStatus);
     },
     //completion
-    getPreEditLength(): Promise<number> {
-      return Promise.resolve(currentContext.get().toString().length);
+    getPreEdit(): Promise<string> {
+      return Promise.resolve(currentContext.get().toString());
     },
     getPrefix(): Promise<string> {
       const state = currentContext.get().state;

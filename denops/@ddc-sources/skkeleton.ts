@@ -17,8 +17,9 @@ export class Source
     args: GetCompletePositionArguments<Record<string, never>>,
   ): Promise<number> {
     const inputLength = args.context.input.length;
-    const preEditLength =
-      (await args.denops.dispatch("skkeleton", "getPreEditLength")) as number;
+    const preEdit =
+      (await args.denops.dispatch("skkeleton", "getPreEdit")) as string;
+    const preEditLength = preEdit.length;
     return inputLength - preEditLength;
   }
 
