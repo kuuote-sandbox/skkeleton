@@ -1,6 +1,6 @@
 # Skkeleton
 
-![test](https://github.com/kuuote-sandbox/skkeleton/tree/main/skk.avif)
+![test](https://raw.githubusercontent.com/kuuote-sandbox/skkeleton/main/skk.avif)
 
 skkeleton is a Vim/Neovim plugin that provides japanese input environment called
 SKK.
