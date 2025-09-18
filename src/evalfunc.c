@@ -1254,6 +1254,7 @@ static argcheck_T arg1_list_tuple_dict_blob_or_string[] = {arg_list_tuple_dict_b
 static argcheck_T arg1_lnum[] = {arg_lnum};
 static argcheck_T arg1_number[] = {arg_number};
 static argcheck_T arg1_string[] = {arg_string};
+static argcheck_T arg1_string_or_blob[] = {arg_string_or_blob};
 static argcheck_T arg1_string_or_list_any[] = {arg_string_or_list_any};
 static argcheck_T arg1_string_or_list_string[] = {arg_string_or_list_string};
 static argcheck_T arg1_string_or_nr[] = {arg_string_or_nr};
@@ -2842,7 +2843,7 @@ static const funcentry_T global_functions[] =
 			ret_number_bool,    f_settagstack},
     {"setwinvar",	3, 3, FEARG_3,	    arg3_number_string_any,
 			ret_void,	    f_setwinvar},
-    {"sha256",		1, 1, FEARG_1,	    arg1_string,
+    {"sha256",		1, 1, FEARG_1,	    arg1_string_or_blob,
 			ret_string,
 #ifdef FEAT_CRYPT
 	    f_sha256
