@@ -11742,20 +11742,36 @@ f_settagstack(typval_T *argvars, typval_T *rettv)
 
 #ifdef FEAT_CRYPT
 /*
- * "sha256({string})" function
+ * "sha256({expr})" function
  */
     static void
 f_sha256(typval_T *argvars, typval_T *rettv)
 {
     char_u	*p;
+    int		len;
 
-    if (in_vim9script() && check_for_string_arg(argvars, 0) == FAIL)
+    if (in_vim9script() && check_for_string_or_blob_arg(argvars, 0) == FAIL)
 	return;
 
-    p = tv_get_string(&argvars[0]);
-    rettv->vval.v_string = vim_strsave(
-				    sha256_bytes(p, (int)STRLEN(p), NULL, 0));
     rettv->v_type = VAR_STRING;
+    rettv->vval.v_string = NULL;
+
+    if (argvars[0].v_type == VAR_BLOB)
+    {
+	blob_T *blob = argvars[0].vval.v_blob;
+	if (blob != NULL)
+	{
+	    p = (char_u *)blob->bv_ga.ga_data;
+	    len = blob->bv_ga.ga_len;
+	    rettv->vval.v_string = vim_strsave(sha256_bytes(p, len, NULL, 0));
+	}
+    }
+    else
+    {
+	p = tv_get_string(&argvars[0]);
+	rettv->vval.v_string = vim_strsave(
+				    sha256_bytes(p, (int)STRLEN(p), NULL, 0));
+    }
 }
 #endif // FEAT_CRYPT
 
